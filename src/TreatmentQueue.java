@@ -16,7 +16,7 @@ public class TreatmentQueue {
             tile = newTreatment; // if head is null, automatically tile is null, too.
         }
         else{
-            tile.next = newTreatment;
+            tile.next = newTreatment;   // Adding new element at the final of the queue.
             tile = newTreatment;
         }
         size++;

@@ -31,7 +31,7 @@ public class PatientList {
 
     public String findPatient(int id){
         if (head == null) {
-            throw new RuntimeException("Empty list");
+            System.out.println("Empty list.");
         }
         Patient tempPatient = head;
         while(tempPatient != null){
