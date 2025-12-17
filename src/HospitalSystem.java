@@ -28,26 +28,27 @@ public class HospitalSystem {
 
     public void processTreatmentRequest() {
         addDischargeRecord(treatmentQueue.head.patientId); // Adding the patient to dischargeStack by addDischargeRecord method.
+        patientList.removePatient(treatmentQueue.head.patientId);   // Deleting the patient which at the beginning of the queue.
         treatmentQueue.dequeue();   // Removing the patient from treatmentQueue (from beginning of the queue FIFO)
     }
 
 
-    public void printCurrentSystemState(){
+    public void printCurrentSystemState(){  // Printing current system state.
         if(patientList.head == null || treatmentQueue.head == null){
             System.out.println("There is no patient yet.");
         }
-        System.out.println("Patient List: ");
+        System.out.println("Patient List: ");   // Patient list heading
         System.out.println("----------------");
-        patientList.printList();
+        patientList.printList();    // Printing the list.
 
-        System.out.println("Patient Queue: ");
+        System.out.println("Patient Queue: ");  // Patient queue heading
         System.out.println("----------------");
-        treatmentQueue.printQueue();
+        treatmentQueue.printQueue();    //Printing the queue
 
         if(dischargeStack != null){
-            System.out.println("Discharge Stack: ");
+            System.out.println("Discharge Stack: ");    // Discharge Stack heading
             System.out.println("----------------");
-            dischargeStack.printStack();
+            dischargeStack.printStack();    // Printing the stack.
         }
     }
 

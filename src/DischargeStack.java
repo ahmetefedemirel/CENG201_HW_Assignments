@@ -36,5 +36,6 @@ public class DischargeStack {
             System.out.println(temp.patientId);
             temp = temp.next;
         }
+        System.out.println("At the bottom of stack");
     }
 }

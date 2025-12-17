@@ -1,12 +1,12 @@
 public class PatientList {
     Patient head;   // Creating head pointer.
 
-    public PatientList(){
+    public PatientList(){   // Constructor
         this.head = null;
     }
 
-    public void addPatient(int id, String name , int severity, int age) {
-        Patient newPatient = new Patient(id, name, severity, age);
+    public void addPatient(int id, String name , int severity, int age) {   // Adding patient to beginning of the list.
+        Patient newPatient = new Patient(id, name, severity, age);  // Creating new Patient object.
         if (head == null) {
             head = newPatient;
         }
@@ -29,21 +29,21 @@ public class PatientList {
         prev.next = tempPatient.next;   // delete the node to be deleted.
     }
 
-    public String findPatient(int id){
+    public String findPatient(int id){  // Finding Patient by ID.
         if (head == null) {
-            System.out.println("Empty list.");
+            System.out.println("Empty list.");  // If head is null, print "Empty list."
         }
-        Patient tempPatient = head;
+        Patient tempPatient = head; // temp patient holds head.
         while(tempPatient != null){
             if(tempPatient.id == id){
-                return tempPatient.name;
+                return tempPatient.name;    // Check tempPatient.id is equal to id or not.
             }
             tempPatient = tempPatient.next;
         }
         return null;
     }
 
-    public void printList(){
+    public void printList(){    // Print list method.
         Patient tempPatient = head;
         while(tempPatient != null){
             System.out.println(tempPatient.name);

@@ -22,22 +22,23 @@ public class TreatmentQueue {
         size++;
     }
 
-    public void dequeue(){
+    public void dequeue(){  // Delete the patient which at the beginning of the queue.
         if(head == null){
-            throw new RuntimeException("Empty queue.");
+            throw new RuntimeException("Empty queue."); // if head is null, print "Empty queue"
         }
         else{
-            head = head.next;
-            size--;
+            head = head.next;   // Shifting the head.
+            size--; // Decreasing the size.
         }
     }
 
     public int size(){
         return size;
-    }
+    }   // Return size.
 
-    public void printQueue(){
+    public void printQueue(){   // Print queue by ID.
         TreatmentRequest temp = head;
+        System.out.println("At the beginning of the queue");
         while(temp != null){
             System.out.println(temp.patientId);
             temp = temp.next;
