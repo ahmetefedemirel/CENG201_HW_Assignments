@@ -2,11 +2,11 @@ public class TestStack {
     public static void main(String[] args) {
         DischargeStack newStack = new DischargeStack();     // Creating newStack object.
 
-        newStack.push(1);
-        newStack.push(2);
-        newStack.push(3);
-        newStack.push(4);
-        newStack.push(5);   // Adding 5 discharge records.
+        newStack.push(new Patient(132, "Ahmet Şimşek", 3, 21));
+        newStack.push(new Patient(132, "Ahmet Şimşek", 3, 21));
+        newStack.push(new Patient(132, "Ahmet Şimşek", 3, 21));
+        newStack.push(new Patient(132, "Ahmet Şimşek", 3, 21));
+        newStack.push(new Patient(132, "Ahmet Şimşek", 3, 21));// Adding 5 discharge records.
 
 
         newStack.pop();

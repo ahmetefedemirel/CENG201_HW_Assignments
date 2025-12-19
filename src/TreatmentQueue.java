@@ -1,6 +1,6 @@
 public class TreatmentQueue {
-    TreatmentRequest head;  // Creating head pointer
-    TreatmentRequest tile;  // Creating tile pointer for the last element of the list.
+    Node head;  // Creating head pointer
+    Node tile;  // Creating tile pointer for the last element of the list.
     int size;
 
     public TreatmentQueue(){
@@ -9,8 +9,8 @@ public class TreatmentQueue {
     }
 
 
-    public void enqueue(int patientId){      // Enqueue method FIFO behavior. (First in First out).
-        TreatmentRequest newTreatment = new TreatmentRequest(patientId);    // Creating new TreatmentRequest object.
+    public void enqueue(Patient patient){      // Enqueue method FIFO behavior. (First in First out).
+        Node newTreatment = new Node(patient);    // Creating new TreatmentRequest object.
         if(head == null){   // Checking head is null or not.
             head = newTreatment;
             tile = newTreatment; // if head is null, automatically tile is null, too.
@@ -22,14 +22,14 @@ public class TreatmentQueue {
         size++;
     }
 
-    public void dequeue(){  // Delete the patient which at the beginning of the queue.
+    public Patient dequeue(){  // Delete the patient which at the beginning of the queue.
         if(head == null){
             throw new RuntimeException("Empty queue."); // if head is null, print "Empty queue"
         }
-        else{
-            head = head.next;   // Shifting the head.
-            size--; // Decreasing the size.
-        }
+        Patient patient = head.patient;
+        head = head.next;
+        size--;
+        return patient;
     }
 
     public int size(){
@@ -37,10 +37,10 @@ public class TreatmentQueue {
     }   // Return size.
 
     public void printQueue(){   // Print queue by ID.
-        TreatmentRequest temp = head;
+        Node temp = head;
         System.out.println("At the beginning of the queue");
         while(temp != null){
-            System.out.println(temp.patientId);
+            System.out.println(temp.patient.id);
             temp = temp.next;
         }
     }

@@ -9,27 +9,34 @@ public class HospitalSystem {
         dischargeStack = new DischargeStack();
     }
 
-    public void addPatient(int id, String name , int severity, int age){     // Adding patient to patientList.
-        patientList.addPatient(id, name, severity, age);
+    public void addPatient(Patient patient){     // Adding patient to patientList.
+        patientList.addPatient(patient);
     }
 
-    public void addTreatmentRequest(int id){    // Adding patient to treatmentQueue.
-        treatmentQueue.enqueue(id);
+    public void addTreatmentRequest(Patient p){    // Adding patient to treatmentQueue.
+        treatmentQueue.enqueue(p);
     }
 
-    public void admitPatient(int id, String name, int severity, int age){
-        addPatient(id, name, severity, age);
-        addTreatmentRequest(id);
+    public void admitPatient(Patient patient){
+        addPatient(patient);
+        addTreatmentRequest(patient);
     }
 
-    public void addDischargeRecord(int id){     // Adding discharge record to discharge stack.
-        dischargeStack.push(id);                // When the patient discharges.
+    public void addDischargeRecord(int patientId){     // Adding discharge record to discharge stack.
+        Patient p = patientList.findPatient(patientId);
+        dischargeStack.push(p);
     }
 
     public void processTreatmentRequest() {
-        addDischargeRecord(treatmentQueue.head.patientId); // Adding the patient to dischargeStack by addDischargeRecord method.
-        patientList.removePatient(treatmentQueue.head.patientId);   // Deleting the patient which at the beginning of the queue.
-        treatmentQueue.dequeue();   // Removing the patient from treatmentQueue (from beginning of the queue FIFO)
+        Patient treatedPatient = treatmentQueue.dequeue();
+
+        if (treatedPatient == null) {
+            System.out.println("Treatment queue is empty");
+            return;
+        }
+
+        dischargeStack.push(treatedPatient);
+        patientList.removePatient(treatedPatient.id);
     }
 
 
@@ -54,16 +61,22 @@ public class HospitalSystem {
 
     public static void main(String[] args) {
         HospitalSystem system = new HospitalSystem();
-        system.admitPatient(123, "Ahmet", 4, 21);
-        system.admitPatient(412, "Ali", 5, 34);
-        system.admitPatient(425, "Mehmet", 8, 64);
-        system.admitPatient(987, "Murat", 9, 65);
-        system.admitPatient(654, "Kemal", 1, 32);
+        system.admitPatient(new Patient(123, "Ahmet", 4, 21));
+        system.admitPatient(new Patient(412, "Ali", 5, 34));
+        system.admitPatient(new Patient(425, "Mehmet", 8, 64));
+        system.admitPatient(new Patient(987, "Murat", 9, 65));
+        system.admitPatient(new Patient(654, "Kemal", 1, 32));
 
-        system.processTreatmentRequest();
-        system.processTreatmentRequest();
+        system.printCurrentSystemState();   // Printing the initial system state.
+
+        system.processTreatmentRequest();   // Process 1 time.
+        system.processTreatmentRequest();   //Process 1 time.
 
 
-        system.printCurrentSystemState();
+        system.printCurrentSystemState();   // Printing the final system state.
+
+
+
+
     }
 }

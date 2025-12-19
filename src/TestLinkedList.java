@@ -1,11 +1,12 @@
 public class TestLinkedList {
     public static void main(String[] args) {
         PatientList newList = new PatientList();    // Implementing newList.
-        newList.addPatient(313,"Ali", 3, 21);
-        newList.addPatient(515,"Ahmet", 4, 56);
-        newList.addPatient(425,"Ayşe", 1, 34);
-        newList.addPatient(987,"Veli", 2, 46);
-        newList.addPatient(184,"Murat", 5, 49); // Adding 5 patients to the newList.
+        newList.addPatient(new Patient(132, "Ahmet Şimşek", 3, 21));
+        newList.addPatient(new Patient(232, "Mehmet Çakırcı", 5, 23));
+        newList.addPatient(new Patient(436, "Murat Sakallı", 6, 24));
+        newList.addPatient(new Patient(765, "Ali Yılmaz", 8, 25));
+        newList.addPatient(new Patient(245, "Cemre Batur", 9, 65));
+        // Adding 5 patients to the newList.
 
         newList.printList();    // Printing the inital list.
 

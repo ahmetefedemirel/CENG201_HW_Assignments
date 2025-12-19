@@ -1,18 +1,19 @@
 public class PatientList {
-    Patient head;   // Creating head pointer.
+    Node head;   // Creating head pointer.
 
     public PatientList(){   // Constructor
         this.head = null;
     }
 
-    public void addPatient(int id, String name , int severity, int age) {   // Adding patient to beginning of the list.
-        Patient newPatient = new Patient(id, name, severity, age);  // Creating new Patient object.
+
+    public void addPatient(Patient p) {   // Adding patient to beginning of the list.
+        Node newNode = new Node(p);  // Creating new node object.
         if (head == null) {
-            head = newPatient;
+            head = newNode;
         }
         else {
-            newPatient.next = head;
-            head = newPatient;
+            newNode.next = head;
+            head = newNode;
         }
     }
 
@@ -20,23 +21,30 @@ public class PatientList {
         if (head == null) {
             throw new RuntimeException("Empty list");
         }
-        Patient tempPatient = head; // current node
-        Patient prev = null;    // to access previous node created prev pointer.
-        while(tempPatient != null && tempPatient.id != id){ // searching for the node to be deleted.
-            prev = tempPatient; // prev is tempPatient's previous node
-            tempPatient = tempPatient.next; // that is why prev is tempPatient's previous node
+
+        if (head.patient.id == id) {    // If searching id is head, delete head.
+            head = head.next;
+            return;
         }
-        prev.next = tempPatient.next;   // delete the node to be deleted.
+
+        Node current = head; // current node
+        while(current.next != null){ // searching for the node to be deleted.
+            if(current.next.patient.id == id){  // Checking the nodes which is not head
+                current.next = current.next.next;   // Shifting the node which is not head.
+                return;
+            }
+            current = current.next; // Shifting current iftself.
+        }
     }
 
-    public String findPatient(int id){  // Finding Patient by ID.
+    public Patient findPatient(int id){  // Finding Patient by ID.
         if (head == null) {
             System.out.println("Empty list.");  // If head is null, print "Empty list."
         }
-        Patient tempPatient = head; // temp patient holds head.
+        Node tempPatient = head; // temp patient holds head.
         while(tempPatient != null){
-            if(tempPatient.id == id){
-                return tempPatient.name;    // Check tempPatient.id is equal to id or not.
+            if(tempPatient.patient.id == id){
+                return tempPatient.patient;    // Check tempPatient.id is equal to id or not.
             }
             tempPatient = tempPatient.next;
         }
@@ -44,9 +52,9 @@ public class PatientList {
     }
 
     public void printList(){    // Print list method.
-        Patient tempPatient = head;
+        Node tempPatient = head;
         while(tempPatient != null){
-            System.out.println(tempPatient.name);
+            System.out.println(tempPatient.patient.name);
             tempPatient = tempPatient.next;
         }
     }
