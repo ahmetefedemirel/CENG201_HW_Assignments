@@ -1,8 +1,24 @@
 public class PatientList {
-    Node head;   // Creating head pointer.
+
+
+    private static class Node { // Private Node class
+        Patient patient;
+        Node next;
+
+        Node(Patient p) {
+            this.patient = p;
+            this.next = null;
+        }
+    }
+    private Node head;  // Creating head pointer.
+
 
     public PatientList(){   // Constructor
         this.head = null;
+    }
+
+    public Node getHead(){
+        return head;
     }
 
 

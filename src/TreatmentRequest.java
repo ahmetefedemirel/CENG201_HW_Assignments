@@ -1,6 +1,5 @@
 public class TreatmentRequest {
     int patientId;
-    String name;
     long arrivalTime; // Creating the next pointer for queue
 
     public TreatmentRequest(int patientId) {    // Constructor

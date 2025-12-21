@@ -1,15 +1,25 @@
 public class DischargeStack {
-    Node top;    // Creating top poiter.
+
+    private static class Node{
+        DischargeRecord record;
+        Node next;
+        Node(DischargeRecord record){
+            this.record = record;
+            next = null;
+        }
+    }
+
+    private Node top;
 
     public DischargeStack(){    // Constructor
         this.top = null;
     }
 
 
-    public void push(Patient patient){    // push() method runs by LIFO behavior (First In Fırst Out)
-        Node record = new Node(patient);    // Creating new object.
-        record.next = top;  // Pushing the new record.
-        top = record;
+    public void push(DischargeRecord record){    // push() method runs by LIFO behavior (First In Fırst Out)
+        Node newNode = new Node(record);
+        newNode.next = top;  // Pushing the new record.
+        top = newNode;
     }
 
     public void pop(){  // Pop() method deletes the last record from the DischargeStack.
@@ -26,14 +36,14 @@ public class DischargeStack {
             System.out.println("Empty list.");
         }
         else{
-            System.out.println(top.patient.id);
+            System.out.println(top.record.patientId);
         }
     }
 
     public void printStack(){   // Printing the stack.
         Node temp = top;
         while(temp != null){
-            System.out.println(temp.patient.id);
+            System.out.println(temp.record.patientId);
             temp = temp.next;
         }
         System.out.println("At the bottom of stack");

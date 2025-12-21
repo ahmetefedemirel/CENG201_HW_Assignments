@@ -1,16 +1,31 @@
 public class TreatmentQueue {
-    Node head;  // Creating head pointer
-    Node tile;  // Creating tile pointer for the last element of the list.
     int size;
+
+
+    private static class Node{
+        TreatmentRequest treatmentRequest;
+        Node next;
+        Node(TreatmentRequest treatmentRequest){
+            next = null;
+            this.treatmentRequest = treatmentRequest;
+        }
+    }
+
+    private Node head;  // Creating head pointer
+    private Node tile;  // Creating tile pointer for the last element of the list.
 
     public TreatmentQueue(){
         head = null;
         size = 0;
     }
 
+    public Node getHead(){
+        return head;
+    }
 
-    public void enqueue(Patient patient){      // Enqueue method FIFO behavior. (First in First out).
-        Node newTreatment = new Node(patient);    // Creating new TreatmentRequest object.
+
+    public void enqueue(TreatmentRequest request){      // Enqueue method FIFO behavior. (First in First out).
+        Node newTreatment = new Node(request);    // Creating new TreatmentRequest object.
         if(head == null){   // Checking head is null or not.
             head = newTreatment;
             tile = newTreatment; // if head is null, automatically tile is null, too.
@@ -22,14 +37,14 @@ public class TreatmentQueue {
         size++;
     }
 
-    public Patient dequeue(){  // Delete the patient which at the beginning of the queue.
+    public TreatmentRequest dequeue(){  // Delete the patient which at the beginning of the queue.
         if(head == null){
             throw new RuntimeException("Empty queue."); // if head is null, print "Empty queue"
         }
-        Patient patient = head.patient;
+        TreatmentRequest treatmentRequest = head.treatmentRequest;
         head = head.next;
         size--;
-        return patient;
+        return treatmentRequest;
     }
 
     public int size(){
@@ -40,7 +55,7 @@ public class TreatmentQueue {
         Node temp = head;
         System.out.println("At the beginning of the queue");
         while(temp != null){
-            System.out.println(temp.patient.id);
+            System.out.println(temp.treatmentRequest.patientId);
             temp = temp.next;
         }
     }
