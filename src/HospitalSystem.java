@@ -1,29 +1,31 @@
 import java.util.HashMap;
+
 public class HospitalSystem {
     public PatientList patientList;
     public TreatmentQueue treatmentQueue;
     public DischargeStack dischargeStack;
     public HashMap<Integer, Patient> hashMap;
+    public int[] BubbleSortArray;
 
     public HospitalSystem(){    // Creating our PatientList, TreatmentQueue, DischargeStack.
         patientList = new PatientList();
-        treatmentQueue = new TreatmentQueue();
+        treatmentQueue = new TreatmentQueue(true);
         dischargeStack = new DischargeStack();
         hashMap = new HashMap<>();
     }
 
-    public void addPatient(Patient patient){     // Adding patient to patientList.
+    public void addPatient(Patient patient, boolean priority){     // Adding patient to patientList.
         patientList.addPatient(patient);
         hashMap.put(patient.id, patient);
     }
 
     public void addTreatmentRequest(TreatmentRequest request){    // Adding patient to treatmentQueue.
-        treatmentQueue.enqueue(request);
+        treatmentQueue.enqueueByPriority(request);
     }
 
-    public void admitPatient(Patient patient){
-        addPatient(patient);
-        TreatmentRequest treatmentRequest = new TreatmentRequest(patient.id);
+    public void admitPatient(Patient patient, boolean priority){
+        addPatient(patient, priority);
+        TreatmentRequest treatmentRequest = new TreatmentRequest(patient.id, priority);
         addTreatmentRequest(treatmentRequest);
     }
 
@@ -35,7 +37,7 @@ public class HospitalSystem {
     }
 
     public void processTreatmentRequest() {;
-        TreatmentRequest treatmentRequest = treatmentQueue.dequeue();
+        TreatmentRequest treatmentRequest = treatmentQueue.dequeuePriority();
         addDischargeRecord(treatmentRequest.patientId);
 
     }
@@ -51,7 +53,7 @@ public class HospitalSystem {
 
         System.out.println("Patient Queue: ");  // Patient queue heading
         System.out.println("----------------");
-        treatmentQueue.printQueue();    //Printing the queue
+        treatmentQueue.printQueueByPriority();    //Printing the queue
 
         if(dischargeStack != null){
             System.out.println("Discharge Stack: ");    // Discharge Stack heading
@@ -60,13 +62,15 @@ public class HospitalSystem {
         }
     }
 
+
+
     public static void main(String[] args) {
         HospitalSystem system = new HospitalSystem();
-        system.admitPatient(new Patient(543, "Ahmet", 6, 76));
-        system.admitPatient(new Patient(412, "Ali", 5, 34));
-        system.admitPatient(new Patient(425, "Mehmet", 8, 64));
-        system.admitPatient(new Patient(987, "Murat", 9, 65));
-        system.admitPatient(new Patient(654, "Kemal", 1, 32));
+        system.admitPatient(new Patient(543, "Ahmet", 6, 76), false);
+        system.admitPatient(new Patient(412, "Ali", 5, 34), false);
+        system.admitPatient(new Patient(425, "Mehmet", 8, 64), true);
+        system.admitPatient(new Patient(987, "Murat", 9, 65), false);
+        system.admitPatient(new Patient(654, "Kemal", 1, 32), true);
 
         //system.printCurrentSystemState();   // Printing the initial system state.
 
