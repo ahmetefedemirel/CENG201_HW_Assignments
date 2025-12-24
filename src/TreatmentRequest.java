@@ -14,4 +14,9 @@ public class TreatmentRequest {
         arrivalTime = System.currentTimeMillis();
     }
 
+    @Override
+    public String toString() {
+        return
+                "patientId: " + patientId + ", arrivalTime: " + String.format("%tT", arrivalTime);
+    }
 }

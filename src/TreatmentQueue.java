@@ -80,17 +80,18 @@ public class TreatmentQueue {
         }
     }
 
-
     public void printQueueByPriority(){ // Print the queue by priority.
         Node temp = emergency.head; // Node temp holds emergency.head
         System.out.println("At the beginning queue.");
         while (temp != null){   // Check temp is null or not.
-            System.out.println(temp.treatmentRequest.patientId);    // print the request's id
+            System.out.println(temp.treatmentRequest.toString());
+            // print the request's id and arrival time.
             temp = temp.next;   // Shifting the temp.
         }
         temp = normal.head; // Now, temp holds normal.head
         while(temp != null){    // Check temp is null or not.
-            System.out.println(temp.treatmentRequest.patientId);    // print the request's id
+            System.out.println(temp.treatmentRequest.toString());
+            // print the request's id and arrival time.
             temp = temp.next;   // Shifting the temp
         }
     }

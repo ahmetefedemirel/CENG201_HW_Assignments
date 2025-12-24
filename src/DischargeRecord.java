@@ -6,4 +6,9 @@ public class DischargeRecord {
         this.patientId = patientId;
         this.dischargeTime = System.currentTimeMillis();
     }
+
+    @Override
+    public String toString() {
+        return "patientId: " + patientId + ", dischargeTime: " + String.format("%tT", dischargeTime);
+    }
 }

@@ -1,11 +1,11 @@
 import java.util.HashMap;
+import java.util.ArrayList;
 
-public class HospitalSystem {
+public class HospitalSystem{
     public PatientList patientList;
     public TreatmentQueue treatmentQueue;
     public DischargeStack dischargeStack;
     public HashMap<Integer, Patient> hashMap;
-    public int[] BubbleSortArray;
 
     public HospitalSystem(){    // Creating our PatientList, TreatmentQueue, DischargeStack.
         patientList = new PatientList();
@@ -14,7 +14,7 @@ public class HospitalSystem {
         hashMap = new HashMap<>();
     }
 
-    public void addPatient(Patient patient, boolean priority){     // Adding patient to patientList.
+    public void addPatient(Patient patient){     // Adding patient to patientList.
         patientList.addPatient(patient);
         hashMap.put(patient.id, patient);
     }
@@ -24,7 +24,7 @@ public class HospitalSystem {
     }
 
     public void admitPatient(Patient patient, boolean priority){
-        addPatient(patient, priority);
+        addPatient(patient);
         TreatmentRequest treatmentRequest = new TreatmentRequest(patient.id, priority);
         addTreatmentRequest(treatmentRequest);
     }
@@ -60,28 +60,26 @@ public class HospitalSystem {
             System.out.println("----------------");
             dischargeStack.printStack();    // Printing the stack.
         }
+        sortPatientsBySeverity();
     }
 
+    public void sortPatientsBySeverity(){   // Sorting method by Bubble Sort manner.
+        ArrayList<Patient> list = patientList.getAllPatientsAsList();   // Creating new ArrayList from getAllPatientAsList method.
 
-
-    public static void main(String[] args) {
-        HospitalSystem system = new HospitalSystem();
-        system.admitPatient(new Patient(543, "Ahmet", 6, 76), false);
-        system.admitPatient(new Patient(412, "Ali", 5, 34), false);
-        system.admitPatient(new Patient(425, "Mehmet", 8, 64), true);
-        system.admitPatient(new Patient(987, "Murat", 9, 65), false);
-        system.admitPatient(new Patient(654, "Kemal", 1, 32), true);
-
-        //system.printCurrentSystemState();   // Printing the initial system state.
-
-        system.processTreatmentRequest();   // Process 1 time.
-        system.processTreatmentRequest();   //Process 1 time.
-
-
-        system.printCurrentSystemState();   // Printing the final system state.
-
-
-
-
+        int n = list.size();    // Int n = list.size();
+        for (int i = 0; i < n - 1; i++){    // Outer for loop
+            for(int j = 0; j < n - i - 1; j++){ // Inner for loop (each step it compares with previous one)
+                if(list.get(j).severity < list.get(j + 1).severity){    // Check the severities and the smaller one comes to front.
+                    Patient temp = list.get(j); // Temp holds jth index of the list.
+                    list.set(j, list.get(j + 1));   // Set method swaps index j with at the (j + 1)th element.
+                    list.set(j + 1, temp);  // Shifting the temp.
+                }
+            }
+        }
+        System.out.println("\n--- The patients are sorted by severity levels.");    // Heading
+        for(int i = 0; i < list.size(); i++){   // i is index of the list.
+            Patient p = list.get(i);    // ith element of the list is Patient p
+            System.out.println(i + 1 + ". " + p.name + " " + " Severity level: " + p.severity); // print the order.
+        }
     }
 }

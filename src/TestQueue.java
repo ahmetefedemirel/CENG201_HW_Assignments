@@ -3,7 +3,7 @@ public class TestQueue {
 
         // Task 2:
         TreatmentQueue newQueue = new TreatmentQueue();
-        /*newQueue.enqueue(new TreatmentRequest(123));
+        newQueue.enqueue(new TreatmentRequest(123));
         newQueue.enqueue(new TreatmentRequest(456));
         newQueue.enqueue(new TreatmentRequest(678));
         newQueue.enqueue(new TreatmentRequest(987));
@@ -19,7 +19,7 @@ public class TestQueue {
         newQueue.dequeue();     // Dequeue 3 requests.
 
 
-        newQueue.printQueue(newQueue);*/  // Printing the remaining queue.
+        newQueue.printQueue(newQueue);  // Printing the remaining queue.
 
 
         // Task 4:

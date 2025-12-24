@@ -1,5 +1,5 @@
+import java.util.ArrayList;
 public class PatientList {
-
 
     private static class Node { // Private Node class
         Patient patient;
@@ -73,5 +73,16 @@ public class PatientList {
             System.out.println(tempPatient.patient.name);
             tempPatient = tempPatient.next;
         }
+    }
+
+    public ArrayList<Patient> getAllPatientsAsList(){ // Getting all patients as a list for TASK-4.
+        ArrayList<Patient> list = new ArrayList<>();
+
+        Node current = head;
+        while(current != null){
+            list.add(current.patient);
+            current = current.next;
+        }
+        return list;
     }
 }

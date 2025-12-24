@@ -43,7 +43,7 @@ public class DischargeStack {
     public void printStack(){   // Printing the stack.
         Node temp = top;
         while(temp != null){
-            System.out.println(temp.record.patientId);
+            System.out.println(temp.record.toString());
             temp = temp.next;
         }
         System.out.println("At the bottom of stack");
