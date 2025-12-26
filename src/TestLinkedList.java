@@ -8,11 +8,11 @@ public class TestLinkedList {
         newList.addPatient(new Patient(245, "Cemre Batur", 9, 65));
         // Adding 5 patients to the newList.
 
-        newList.printList();    // Printing the inital list.
+        //newList.printList();    // Printing the inital list.
 
-        newList.removePatient(515);     // Removing one of them by ID.
+        newList.removePatient(765);     // Removing one of them by ID.
 
-        System.out.println(newList.findPatient(184));   // Finding patient by ID and printing it's name.
+        System.out.println(newList.findPatient(132));   // Finding patient by ID and printing it's memory address.
 
         newList.printList();    // Printing the final list.
     }

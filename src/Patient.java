@@ -11,4 +11,8 @@ public class Patient {
         this.severity = severity;
         this.age = age;
     }
+
+    public int getId(){
+        return id;
+    }
 }

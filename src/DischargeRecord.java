@@ -8,7 +8,7 @@ public class DischargeRecord {
     }
 
     @Override
-    public String toString() {
+    public String toString() {  // toString method
         return "patientId: " + patientId + ", dischargeTime: " + String.format("%tT", dischargeTime);
     }
 }

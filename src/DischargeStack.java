@@ -27,7 +27,7 @@ public class DischargeStack {
             System.out.println("Empty list.");
         }
         else{
-            top = top.next;
+            top = top.next; // Shifting the top element.
         }
     }
 
@@ -46,6 +46,6 @@ public class DischargeStack {
             System.out.println(temp.record.toString());
             temp = temp.next;
         }
-        System.out.println("At the bottom of stack");
+        System.out.println("At the bottom of stack");   // define the bottom of the stack
     }
 }
